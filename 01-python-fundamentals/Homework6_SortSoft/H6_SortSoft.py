@@ -13,6 +13,8 @@ ARCHIVES_EXT = ('.zip', '.gz', '.tar')
 FOLDERS_NAMES = ('images','documents','audio','video','archives')
 #Глобальні змінні
 TRANS = {}
+known_ext = []
+unknown_ext = []
 
 # Опис усіх необхідних функцій
 #-----------------------------------------------------------
@@ -58,12 +60,7 @@ def create_default_folders(path):
 #             normalize_all_tree_in(path)
 
 
-def analisis_folder_contents(path):   
-    other_folders = []
-    known_ext = []
-    unknown_ext = []
-
-    category_folders = create_default_folders(path)
+def analisis_folder_contents(path,category_folders):   
     if path.is_dir():
         for file_object in path.iterdir():
             if file_object.is_dir():
@@ -72,8 +69,11 @@ def analisis_folder_contents(path):
                 elif not any(file_object.iterdir()):
                     file_object.rmdir()
                 else:
-                    file_object.rename(file_object.with_name(normalize(file_object.name)))
-                    other_folders.append(file_object)
+                    analisis_folder_contents(file_object,category_folders)
+                    if not any(file_object.iterdir()):
+                        file_object.rmdir()
+                    else:
+                        file_object.rename(file_object.with_name(normalize(file_object.name)))
             else:
                 if file_object.suffix in IMAGES_EXT:
                     shutil.move(file_object,category_folders.get(FOLDERS_NAMES[0],path)  / normalize(file_object.name))
@@ -95,14 +95,10 @@ def analisis_folder_contents(path):
                     shutil.unpack_archive(file_object,category_folders.get(FOLDERS_NAMES[4]))
                     if not file_object.suffix in known_ext:
                         known_ext.append(file_object.suffix)
+                    file_object.unlink()
                 else:
                     if not file_object.suffix in unknown_ext:
                         unknown_ext.append(file_object.suffix)
-   # print(f'Images count: {len()}')
-    print(unknown_ext)
-    print(known_ext)
-    for i in other_folders:
-        analisis_folder_contents(i)
 
 #-----------------------------------------------------------
 # Основна (main) частина
@@ -112,4 +108,10 @@ else:
     prepare_translate_dict()
     path = sys.argv[1]
     work_file = pathlib.Path(path)
-    analisis_folder_contents(work_file)
+    list_of_default_folders = create_default_folders(work_file)
+    analisis_folder_contents(work_file, list_of_default_folders)
+    for k,v in list_of_default_folders.items():
+        num_files = len(list(v.glob('*')))
+        print(f'{k} folder have {num_files} files')
+    print(unknown_ext)
+    print(known_ext)
