@@ -100,18 +100,23 @@ def analisis_folder_contents(path,category_folders):
                     if not file_object.suffix in unknown_ext:
                         unknown_ext.append(file_object.suffix)
 
+def main():
+    if len(sys.argv) <= 1:
+        print('Sort was failed. No argument with path to folder')
+    else:
+        prepare_translate_dict()
+        path = sys.argv[1]
+        work_file = pathlib.Path(path)
+        list_of_default_folders = create_default_folders(work_file)
+        analisis_folder_contents(work_file, list_of_default_folders)
+        for k, v in list_of_default_folders.items():
+            num_files = len(list(v.glob('*')))
+            print(f'{k} folder have {num_files} files')
+        print(unknown_ext)
+        print(known_ext)
+
+
 #-----------------------------------------------------------
 # Основна (main) частина
-if len(sys.argv) <= 1:
-    print('Sort was failed. No argument with path to folder')
-else:
-    prepare_translate_dict()
-    path = sys.argv[1]
-    work_file = pathlib.Path(path)
-    list_of_default_folders = create_default_folders(work_file)
-    analisis_folder_contents(work_file, list_of_default_folders)
-    for k,v in list_of_default_folders.items():
-        num_files = len(list(v.glob('*')))
-        print(f'{k} folder have {num_files} files')
-    print(unknown_ext)
-    print(known_ext)
+main()
+
