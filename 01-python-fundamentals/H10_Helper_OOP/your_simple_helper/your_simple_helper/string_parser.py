@@ -1,5 +1,6 @@
 import collections
 
+
 command_work_tulpe = collections.namedtuple(
     'command_work_tulpe', ['command', 'name','phone'])
 
@@ -38,10 +39,3 @@ def parse_the_string(input_string):
     else:
         phone = ''
     return command_work_tulpe(com,name,phone)
-    
-
-
-        
-
-
-

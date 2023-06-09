@@ -1,5 +1,6 @@
 import collections
 
+
 END_STRING = "Good bye!"
 
 contacts = {}
@@ -53,4 +54,3 @@ COMMANDS = {
 
 def get_command(command):
     return COMMANDS[command]
-

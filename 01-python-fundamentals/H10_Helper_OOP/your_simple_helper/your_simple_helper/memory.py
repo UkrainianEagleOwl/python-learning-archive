@@ -1,5 +1,6 @@
 from collections import UserDict
 
+
 class AddressBook(UserDict):
     def add_record(self, aRecord):
         self.data[aRecord.user_name.value] = aRecord
@@ -51,20 +52,3 @@ class Record():
     
     def change_n_phone(self, aPhoneIndex, aNewPhone):
         self.user_phones[aPhoneIndex].value = aNewPhone
-
-
-
-#Test
-# Book = AddressBook()
-# some_record = Record('Alex','666888')
-# some_name = Name('Ann')
-# some_phone = Phone('6667777')
-# some_record.change_n_phone(0,'88888')
-# some_record.add_phone(some_phone)
-# some_record.remove_phone(some_phone)
-# some_record.remove_n_phone(0)
-# some_record.add_phone(some_phone)
-# Book.add_record(some_record)
-
-# print(Book)
-

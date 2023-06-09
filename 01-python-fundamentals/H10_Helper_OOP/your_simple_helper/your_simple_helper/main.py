@@ -1,6 +1,7 @@
 from commands import get_command, END_STRING
 from string_parser import parse_the_string #, command_work_tulpe
 
+
 def get_command_input(Input_message=''):
     Input_value = None
     while Input_value is None:
