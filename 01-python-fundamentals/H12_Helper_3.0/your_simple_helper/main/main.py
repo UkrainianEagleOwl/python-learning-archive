@@ -1,7 +1,7 @@
 
 
 from commands import get_command, END_STRING,greetings
-from parser_ai.string_parser_ai import parse_input_get_cmd 
+from string_parser_ai import parse_input_get_cmd 
 from open_ai_input_assistent import analize_input_activate_func,activate_openai
 from commands import get_command_input
 from cryptography.fernet import Fernet
@@ -23,7 +23,7 @@ def main():
                 print(analize_input_activate_func(command, input_string))
                 input_string = get_command_input()
                 list(input_string.split(','))
-                cmd_func = get_command(command[id])
+                cmd_func = get_command(command['id'])
                 cmd_func(*list)
             if command["name"] == 'exit':
                 print(analize_input_activate_func(command))

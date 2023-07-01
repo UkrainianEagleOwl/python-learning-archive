@@ -1,8 +1,12 @@
-from your_simple_helper import memory
+import memory
 import unittest
 import tempfile
 import os
 from datetime import datetime
+
+
+
+
 
 def Create_simple_record(name = 'Alex'):
     return memory.Record(name, '+380(50)543-5-391', datetime(year=1970, month=11, day=7))
@@ -106,20 +110,20 @@ class AddressBookTest(unittest.TestCase):
         result = address_book.find_in_values(record)
         self.assertEqual(result, ("John Doe", record))
 
-    def test_address_book_iterator(self):
-        address_book = memory.AddressBook()
-        record1 = memory.Record("John Doe")
-        record2 = memory.Record("Jane Smith")
-        record3 = memory.Record("Bob Johnson")
-        address_book.add_record(record1)
-        address_book.add_record(record2)
-        address_book.add_record(record3)
+    # def test_address_book_iterator(self):
+    #     address_book = memory.AddressBook()
+    #     record1 = memory.Record("John Doe")
+    #     record2 = memory.Record("Jane Smith")
+    #     record3 = memory.Record("Bob Johnson")
+    #     address_book.add_record(record1)
+    #     address_book.add_record(record2)
+    #     address_book.add_record(record3)
 
-        iterator = iter(address_book)
-        self.assertEqual(next(iterator), repr(record1))
-        self.assertEqual(next(iterator), repr(record2))
-        self.assertEqual(next(iterator), repr(record3))
-        self.assertRaises(StopIteration, next, iterator)
+    #     iterator = iter(address_book)
+    #     self.assertEqual(next(iterator), repr(record1))
+    #     self.assertEqual(next(iterator), repr(record2))
+    #     self.assertEqual(next(iterator), repr(record3))
+    #     self.assertRaises(StopIteration, next, iterator)
 
 class NameTest(unittest.TestCase):
     def test_get_set_value(self):

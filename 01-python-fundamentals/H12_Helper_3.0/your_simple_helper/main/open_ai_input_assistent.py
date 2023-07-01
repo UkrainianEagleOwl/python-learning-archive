@@ -1,7 +1,7 @@
 import openai
 
 def activate_openai(key):
-    openai.api_key = key
+    openai.api_key = 'Your OpenAI Key'
     
 
 def analize_input_activate_func(command, customer_input = None,  iteration_done = None):
@@ -14,7 +14,7 @@ def analize_input_activate_func(command, customer_input = None,  iteration_done 
     response = openai.Completion.create(
         model="text-davinci-003",
         prompt=prompt_string,
-        max_tokens=50,
+        max_tokens=30,
         n=1,
         stop=None,
         temperature=0.6,
