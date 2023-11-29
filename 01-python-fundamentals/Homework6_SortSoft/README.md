@@ -1,5 +1,3 @@
-### README
-
 # File Organizer Script
 
 ## Overview
